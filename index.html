@@ -1,0 +1,205 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Home &mdash; No More Simple</title>
+    
+    <link rel="stylesheet" href="_static/modern.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.1b',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="shortcut icon" href="_static/tinkerer.ico"/>
+    
+    <link rel="top" title="No More Simple" href="#" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.html">
+     
+
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var bodywrapper = document.getElementsByClassName("documentwrapper")[0];
+            var sidebar = document.getElementsByClassName("sphinxsidebar")[0];
+
+            if (sidebar.offsetHeight > bodywrapper.offsetHeight)
+            {
+                bodywrapper.style.minHeight = sidebar.offsetHeight + "px";
+            }
+        });
+    </script>
+
+  </head>
+  <body>
+    
+    <div class="header">
+        <h1 class="heading">
+            <a href="#">
+                <span>No More Simple</span>
+            </a>
+        </h1>
+        <h2 class="tagline">Your time is limited, so don't waste it living someone else's life.</h2>
+    </div>
+    <div class="page_nav">
+        <ul>
+            
+            <li>
+                <a href="#">Home</a>
+            </li>
+            
+            <li class="right">
+                
+    <a href="rss.html" title="Subscribe via RSS">
+        <div class="rss"><span class="webfont">B</span>
+            
+        </div>
+    </a>
+            </li>
+        </ul>
+    </div>
+    <div class="clearer"></div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div class="widget">
+    <h3>Recent Posts</h3>
+    <ul>
+        <li>
+            <a href="2012/06/12/2012_06_12.html">2012/06/12</a>
+        </li>
+    </ul>
+</div>
+
+<div id="searchbox" style="display: none">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    モジュール、クラス、または関数名を入力してください
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+    
+        
+        <div class="timestamp postmeta">
+            <span>June 12, 2012</span> 
+        </div>
+        <?xml version="1.0" ?><div class="section" id="id1">
+<a href="2012/06/12/2012_06_12.html"><h1>2012/06/12</h1></a>
+<div class="section" id="python-programming">
+<h2>Python Programming</h2>
+<p>写真の位置情報を取得して、住所を表示する</p>
+<ol class="arabic simple">
+<li>写真から位置情報を抜き出す</li>
+<li>GoogleMapのAPIを利用して位置情報から住所を取得する</li>
+</ol>
+<p><strong>1. 写真から位置情報を抜き出す</strong></p>
+<p>google_map.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># coding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">googlemaps</span> <span class="kn">import</span> <span class="n">GoogleMaps</span>
+
+<span class="k">def</span> <span class="nf">address_to_latlng</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">gmaps</span> <span class="o">=</span> <span class="n">GoogleMaps</span><span class="p">()</span>
+    <span class="n">lat</span><span class="p">,</span><span class="n">lng</span> <span class="o">=</span> <span class="n">gmaps</span><span class="o">.</span><span class="n">address_to_latlng</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+
+<span class="k">def</span> <span class="nf">latlng_to_address</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">):</span>
+    <span class="n">gmaps</span> <span class="o">=</span> <span class="n">GoogleMaps</span><span class="p">()</span>
+    <span class="n">destination</span> <span class="o">=</span> <span class="n">gmaps</span><span class="o">.</span><span class="n">latlng_to_address</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">destination</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2. GoogleMapのAPIを利用して位置情報から住所を取得する</strong></p>
+<p>exif.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># coding: utf-8</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pexif</span> <span class="kn">import</span> <span class="n">JpegFile</span>
+<span class="kn">import</span> <span class="nn">google_map</span>
+
+<span class="n">argvs</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+
+<span class="n">ef</span> <span class="o">=</span> <span class="n">JpegFile</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">argvs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">get_geo</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">google_map</span><span class="o">.</span><span class="n">latlng_to_address</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">geo</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>3. 使い方</strong></p>
+<div class="highlight-text"><div class="highlight"><pre>exif.py 画像ファイル名(フルパス)
+</pre></div>
+</div>
+</div>
+<div class="section" id="fabric-recipe">
+<h2>Fabric Recipe</h2>
+<p><a class="reference external" href="http://docs.fabfile.org/en/1.4.2/usage/env.html#key-filename">ssh keyの設定</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">env</span><span class="o">.</span><span class="n">key_filename</span> <span class="o">=</span> <span class="s">&quot;filename&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+        
+    <div class="postmeta">
+        
+        <div class="author">
+            <span>Posted by Shuichi Takaoka</span>
+        </div>
+        
+        
+        
+    </div>
+    
+    <div class="archive_link">
+        <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
+    </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Shuichi Takaoka.
+        Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+
+    
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>No More Simple</title>
+        <link>http://127.0.0.1/blog/html/</link>
+        <description>Your time is limited, so don't waste it living someone else's life.</description>
+        <language>en-us</language>
+        <pubDate>Mon, 11 Jun 2012 15:00:00 GMT</pubDate>
+        <item>
+            <link>http://127.0.0.1/blog/html/2012/06/12/2012_06_12.html</link>
+            <guid>http://127.0.0.1/blog/html/2012/06/12/2012_06_12.html</guid>
+            <title>2012/06/12</title>
+            <description><![CDATA[<?xml version="1.0" ?><div class="section" id="id1">
+<h1>2012/06/12</h1>
+<div class="section" id="python-programming">
+<h2>Python Programming</h2>
+<p>写真の位置情報を取得して、住所を表示する</p>
+<ol class="arabic simple">
+<li>写真から位置情報を抜き出す</li>
+<li>GoogleMapのAPIを利用して位置情報から住所を取得する</li>
+</ol>
+<p><strong>1. 写真から位置情報を抜き出す</strong></p>
+<p>google_map.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># coding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">googlemaps</span> <span class="kn">import</span> <span class="n">GoogleMaps</span>
+
+<span class="k">def</span> <span class="nf">address_to_latlng</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">gmaps</span> <span class="o">=</span> <span class="n">GoogleMaps</span><span class="p">()</span>
+    <span class="n">lat</span><span class="p">,</span><span class="n">lng</span> <span class="o">=</span> <span class="n">gmaps</span><span class="o">.</span><span class="n">address_to_latlng</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+
+<span class="k">def</span> <span class="nf">latlng_to_address</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">):</span>
+    <span class="n">gmaps</span> <span class="o">=</span> <span class="n">GoogleMaps</span><span class="p">()</span>
+    <span class="n">destination</span> <span class="o">=</span> <span class="n">gmaps</span><span class="o">.</span><span class="n">latlng_to_address</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">destination</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2. GoogleMapのAPIを利用して位置情報から住所を取得する</strong></p>
+<p>exif.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># coding: utf-8</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pexif</span> <span class="kn">import</span> <span class="n">JpegFile</span>
+<span class="kn">import</span> <span class="nn">google_map</span>
+
+<span class="n">argvs</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+
+<span class="n">ef</span> <span class="o">=</span> <span class="n">JpegFile</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">argvs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">geo</span> <span class="o">=</span> <span class="n">ef</span><span class="o">.</span><span class="n">get_geo</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">google_map</span><span class="o">.</span><span class="n">latlng_to_address</span><span class="p">(</span><span class="n">geo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">geo</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>3. 使い方</strong></p>
+<div class="highlight-text"><div class="highlight"><pre>exif.py 画像ファイル名(フルパス)
+</pre></div>
+</div>
+</div>
+<div class="section" id="fabric-recipe">
+<h2>Fabric Recipe</h2>
+<p><a class="reference external" href="http://docs.fabfile.org/en/1.4.2/usage/env.html#key-filename">ssh keyの設定</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">env</span><span class="o">.</span><span class="n">key_filename</span> <span class="o">=</span> <span class="s">&quot;filename&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>]]></description>
+            <pubDate>Mon, 11 Jun 2012 15:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

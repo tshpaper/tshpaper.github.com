@@ -1,0 +1,73 @@
+2012/06/12
+==========
+
+==================
+Python Programming
+==================
+写真の位置情報を取得して、住所を表示する
+
+#. 写真から位置情報を抜き出す
+#. GoogleMapのAPIを利用して位置情報から住所を取得する
+
+**1. 写真から位置情報を抜き出す**
+
+google_map.py
+
+..  code-block:: python
+
+    # coding: utf-8
+
+    from googlemaps import GoogleMaps
+
+    def address_to_latlng(address):
+        gmaps = GoogleMaps()
+        lat,lng = gmaps.address_to_latlng(address)
+        return lat, lng
+
+    def latlng_to_address(lat, lng):
+        gmaps = GoogleMaps()
+        destination = gmaps.latlng_to_address(lat, lng)
+        return destination.encode('utf-8')
+
+**2. GoogleMapのAPIを利用して位置情報から住所を取得する**
+
+exif.py
+
+..  code-block:: python
+
+    #!/usr/bin/env python
+    # coding: utf-8
+
+    import sys
+    import os
+    from pexif import JpegFile
+    import google_map
+
+    argvs = sys.argv
+
+    ef = JpegFile.fromFile(argvs[1])
+    geo = ef.get_geo()
+
+    print google_map.latlng_to_address(geo[0], geo[1])
+
+
+**3. 使い方**
+
+..  code-block:: text
+
+    exif.py 画像ファイル名(フルパス)
+
+
+=============
+Fabric Recipe
+=============
+`ssh keyの設定 <http://docs.fabfile.org/en/1.4.2/usage/env.html#key-filename>`_
+
+::
+
+    env.key_filename = "filename"
+
+.. author:: default
+.. categories:: none
+.. tags:: none
+.. comments::
