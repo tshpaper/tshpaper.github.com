@@ -5,7 +5,29 @@
         <link>http://127.0.0.1/blog/html/</link>
         <description>Your time is limited, so don't waste it living someone else's life.</description>
         <language>en-us</language>
-        <pubDate>Thu, 14 Jun 2012 15:00:00 GMT</pubDate>
+        <pubDate>Mon, 18 Jun 2012 15:00:00 GMT</pubDate>
+        <item>
+            <link>http://127.0.0.1/blog/html/2012/06/19/2012_06_19.html</link>
+            <guid>http://127.0.0.1/blog/html/2012/06/19/2012_06_19.html</guid>
+            <title>2012/06/19</title>
+            <description><![CDATA[<?xml version="1.0" ?><div class="section" id="id1">
+<h1>2012/06/19</h1>
+<div class="section" id="fabricblog">
+<h2>fabricでblogのデプロイを自動化</h2>
+<p><strong>レシピの内容は以下のようなものです</strong></p>
+<div class="highlight-text"><div class="highlight"><pre>def blog_deploy():
+    with prefix('cd /Users/stakaoka/github/tshpaper.github.com/'):
+        with prefix('rsync -av /Users/stakaoka/.virtualenvs/sphinx/blog_tinkerer/sources/blog/html/ .'):
+            local('git status')
+            local('git add .')
+            local('git commit')
+            local('git push origin master')
+</pre></div>
+</div>
+</div>
+</div>]]></description>
+            <pubDate>Mon, 18 Jun 2012 15:00:00 GMT</pubDate>
+        </item>
         <item>
             <link>http://127.0.0.1/blog/html/2012/06/15/2012_06_15.html</link>
             <guid>http://127.0.0.1/blog/html/2012/06/15/2012_06_15.html</guid>

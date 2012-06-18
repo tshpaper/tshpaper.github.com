@@ -1,0 +1,23 @@
+2012/06/19
+==========
+
+==============================
+fabricでblogのデプロイを自動化
+==============================
+
+**レシピの内容は以下のようなものです**
+
+.. code-block:: text
+
+    def blog_deploy():
+        with prefix('cd /Users/stakaoka/github/tshpaper.github.com/'):
+            with prefix('rsync -av /Users/stakaoka/.virtualenvs/sphinx/blog_tinkerer/sources/blog/html/ .'):
+                local('git status')
+                local('git add .')
+                local('git commit')
+                local('git push origin master')
+
+.. author:: default
+.. categories:: none
+.. tags:: none
+.. comments::

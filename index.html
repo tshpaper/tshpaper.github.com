@@ -87,6 +87,9 @@
     <h3>Recent Posts</h3>
     <ul>
         <li>
+            <a href="2012/06/19/2012_06_19.html">2012/06/19</a>
+        </li>
+        <li>
             <a href="2012/06/15/2012_06_15.html">2012/06/15</a>
         </li>
         <li>
@@ -117,6 +120,36 @@
           <div class="body">
             
     
+        
+        <div class="timestamp postmeta">
+            <span>June 19, 2012</span> 
+        </div>
+        <?xml version="1.0" ?><div class="section" id="id1">
+<a href="2012/06/19/2012_06_19.html"><h1>2012/06/19</h1></a>
+<div class="section" id="fabricblog">
+<h2>fabricでblogのデプロイを自動化</h2>
+<p><strong>レシピの内容は以下のようなものです</strong></p>
+<div class="highlight-text"><div class="highlight"><pre>def blog_deploy():
+    with prefix('cd /Users/stakaoka/github/tshpaper.github.com/'):
+        with prefix('rsync -av /Users/stakaoka/.virtualenvs/sphinx/blog_tinkerer/sources/blog/html/ .'):
+            local('git status')
+            local('git add .')
+            local('git commit')
+            local('git push origin master')
+</pre></div>
+</div>
+</div>
+</div>
+        
+    <div class="postmeta">
+        
+        <div class="author">
+            <span>Posted by Shuichi Takaoka</span>
+        </div>
+        
+        
+        
+    </div><div class="separator post_separator"></div>
         
         <div class="timestamp postmeta">
             <span>June 15, 2012</span> 
