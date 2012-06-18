@@ -1,0 +1,62 @@
+2012/06/15
+==========
+
+======================
+blogの新規作成の自動化
+======================
+
+| blogをtinkererとGitHubで始めたので、
+| 新規作成と更新を自動化しようと思いfabricのレシピ書いていたのですが、
+| virtualenv使っていて、workonの部分でエラーが出てはまったので備忘録。
+
+- はじめに書いたレシピ
+
+.. code-block:: text
+
+    def blog_create():
+        local('workon sphinx')
+        cd('blog_tinkerer/sources')
+        local('sh ~/scripts/sh/blog_create.sh')
+
+
+- blog_create.sh
+
+.. code-block:: sh
+
+    #!/bin/sh
+    vim `tinker -p \`date +%Y/%m/%d\` | awk '{print $5}' | sed -e "s/^'//g" -e "s/'$//g"`
+
+
+- エラーの内容は以下のような感じです
+
+.. code-block:: text
+
+    /bin/sh: workon: command not found
+
+いろいろと調べた結果、`ここのサイト <http://lists.gnu.org/archive/html/fab-user/2011-03/msg00035.html>`_ を参考に修正したらうまくいきました。
+
+- 修正後のfabricレシピ
+
+.. code-block:: text
+
+    def blog_create():
+        with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
+            with prefix('workon sphinx'):
+                local('sh ~/scripts/sh/blog_create.sh')
+.. note::
+    cdでビルドするディレクトリまでfabricのレシピの中に書きたかったのですが、うまくいかなかったので、仕方なくshの中に処理を入れました。
+
+- blog_create.sh
+
+.. code-block:: sh
+
+    #!/bin/sh
+    cd blog_tinkerer/sources
+    vim `tinker -p \`date +%Y/%m/%d\` | awk '{print $5}' | sed -e "s/^'//g" -e "s/'$//g"`
+
+**実行すると該当ファイルをvimで開くところまでやってくれるので便利です。**
+
+.. author:: default
+.. categories:: none
+.. tags:: none
+.. comments::

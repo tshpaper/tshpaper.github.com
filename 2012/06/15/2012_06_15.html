@@ -1,0 +1,211 @@
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2012/06/15 &mdash; No More Simple</title>
+    
+    <link rel="stylesheet" href="../../../_static/modern.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.3.1b',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../../../_static/tinkerer.ico"/>
+    
+    <link rel="top" title="No More Simple" href="../../../index.html" />
+    <link rel="next" title="2012/06/12" href="../12/2012_06_12.html" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html">
+     
+
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var bodywrapper = document.getElementsByClassName("documentwrapper")[0];
+            var sidebar = document.getElementsByClassName("sphinxsidebar")[0];
+
+            if (sidebar.offsetHeight > bodywrapper.offsetHeight)
+            {
+                bodywrapper.style.minHeight = sidebar.offsetHeight + "px";
+            }
+        });
+    </script>
+
+  </head>
+  <body>
+    
+    <div class="header">
+        <h1 class="heading">
+            <a href="../../../index.html">
+                <span>No More Simple</span>
+            </a>
+        </h1>
+        <h2 class="tagline">Your time is limited, so don't waste it living someone else's life.</h2>
+    </div>
+    <div class="page_nav">
+        <ul>
+            
+            <li>
+                <a href="../../../index.html">Home</a>
+            </li>
+            
+            <li class="right">
+                
+    <a href="../../../rss.html" title="Subscribe via RSS">
+        <div class="rss"><span class="webfont">B</span>
+            
+        </div>
+    </a>
+            </li>
+        </ul>
+    </div>
+    <div class="clearer"></div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+
+<div class="widget">
+    <h3>Recent Posts</h3>
+    <ul>
+        <li>
+            <a href="#">2012/06/15</a>
+        </li>
+        <li>
+            <a href="../12/2012_06_12.html">2012/06/12</a>
+        </li>
+    </ul>
+</div>
+
+<div id="searchbox" style="display: none">
+  <h3>クイック検索</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="検索" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    モジュール、クラス、または関数名を入力してください
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+    
+    <div class="related">
+        <ul>
+            <li class="right">
+                <a href="../12/2012_06_12.html">2012/06/12</a> &raquo; 
+            </li>
+        </ul>
+    </div>
+    
+        <div class="timestamp postmeta">
+            <span>June 15, 2012</span> 
+        </div>
+    <div class="section" id="id1">
+<h1>2012/06/15</h1>
+<div class="section" id="blog">
+<h2>blogの新規作成の自動化</h2>
+<div class="line-block">
+<div class="line">blogをtinkererとGitHubで始めたので、</div>
+<div class="line">新規作成と更新を自動化しようと思いfabricのレシピ書いていたのですが、</div>
+<div class="line">virtualenv使っていて、workonの部分でエラーが出てはまったので備忘録。</div>
+</div>
+<ul class="simple">
+<li>はじめに書いたレシピ</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>def blog_create():
+    local(&#39;workon sphinx&#39;)
+    cd(&#39;blog_tinkerer/sources&#39;)
+    local(&#39;sh ~/scripts/sh/blog_create.sh&#39;)
+</pre></div>
+</div>
+<ul class="simple">
+<li>blog_create.sh</li>
+</ul>
+<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">&#39;{print $5}&#39;</span> | sed -e <span class="s2">&quot;s/^&#39;//g&quot;</span> -e <span class="s2">&quot;s/&#39;$//g&quot;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>エラーの内容は以下のような感じです</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>/bin/sh: workon: command not found
+</pre></div>
+</div>
+<p>いろいろと調べた結果、<a class="reference external" href="http://lists.gnu.org/archive/html/fab-user/2011-03/msg00035.html">ここのサイト</a> を参考に修正したらうまくいきました。</p>
+<ul class="simple">
+<li>修正後のfabricレシピ</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>def blog_create():
+    with prefix(&#39;source /usr/local/bin/virtualenvwrapper.sh&#39;):
+        with prefix(&#39;workon sphinx&#39;):
+            local(&#39;sh ~/scripts/sh/blog_create.sh&#39;)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">ノート</p>
+<p class="last">cdでビルドするディレクトリまでfabricのレシピの中に書きたかったのですが、うまくいかなかったので、仕方なくshの中に処理を入れました。</p>
+</div>
+<ul class="simple">
+<li>blog_create.sh</li>
+</ul>
+<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">cd </span>blog_tinkerer/sources
+vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">&#39;{print $5}&#39;</span> | sed -e <span class="s2">&quot;s/^&#39;//g&quot;</span> -e <span class="s2">&quot;s/&#39;$//g&quot;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<p><strong>実行すると該当ファイルをvimで開くところまでやってくれるので便利です。</strong></p>
+</div>
+</div>
+
+    
+    <div class="postmeta">
+        
+        <div class="author">
+            <span>Posted by Shuichi Takaoka</span>
+        </div>
+        
+        
+        
+    </div>
+    
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Shuichi Takaoka.
+        Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+
+    
+    </div>
+  </body>
+</html>

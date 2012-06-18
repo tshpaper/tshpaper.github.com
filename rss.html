@@ -5,7 +5,69 @@
         <link>http://127.0.0.1/blog/html/</link>
         <description>Your time is limited, so don't waste it living someone else's life.</description>
         <language>en-us</language>
-        <pubDate>Mon, 11 Jun 2012 15:00:00 GMT</pubDate>
+        <pubDate>Thu, 14 Jun 2012 15:00:00 GMT</pubDate>
+        <item>
+            <link>http://127.0.0.1/blog/html/2012/06/15/2012_06_15.html</link>
+            <guid>http://127.0.0.1/blog/html/2012/06/15/2012_06_15.html</guid>
+            <title>2012/06/15</title>
+            <description><![CDATA[<?xml version="1.0" ?><div class="section" id="id1">
+<h1>2012/06/15</h1>
+<div class="section" id="blog">
+<h2>blogの新規作成の自動化</h2>
+<div class="line-block">
+<div class="line">blogをtinkererとGitHubで始めたので、</div>
+<div class="line">新規作成と更新を自動化しようと思いfabricのレシピ書いていたのですが、</div>
+<div class="line">virtualenv使っていて、workonの部分でエラーが出てはまったので備忘録。</div>
+</div>
+<ul class="simple">
+<li>はじめに書いたレシピ</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>def blog_create():
+    local('workon sphinx')
+    cd('blog_tinkerer/sources')
+    local('sh ~/scripts/sh/blog_create.sh')
+</pre></div>
+</div>
+<ul class="simple">
+<li>blog_create.sh</li>
+</ul>
+<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">'{print $5}'</span> | sed -e <span class="s2">&quot;s/^'//g&quot;</span> -e <span class="s2">&quot;s/'$//g&quot;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>エラーの内容は以下のような感じです</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>/bin/sh: workon: command not found
+</pre></div>
+</div>
+<p>いろいろと調べた結果、<a class="reference external" href="http://lists.gnu.org/archive/html/fab-user/2011-03/msg00035.html">ここのサイト</a> を参考に修正したらうまくいきました。</p>
+<ul class="simple">
+<li>修正後のfabricレシピ</li>
+</ul>
+<div class="highlight-text"><div class="highlight"><pre>def blog_create():
+    with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
+        with prefix('workon sphinx'):
+            local('sh ~/scripts/sh/blog_create.sh')
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">ノート</p>
+<p class="last">cdでビルドするディレクトリまでfabricのレシピの中に書きたかったのですが、うまくいかなかったので、仕方なくshの中に処理を入れました。</p>
+</div>
+<ul class="simple">
+<li>blog_create.sh</li>
+</ul>
+<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">cd </span>blog_tinkerer/sources
+vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">'{print $5}'</span> | sed -e <span class="s2">&quot;s/^'//g&quot;</span> -e <span class="s2">&quot;s/'$//g&quot;</span><span class="sb">`</span>
+</pre></div>
+</div>
+<p><strong>実行すると該当ファイルをvimで開くところまでやってくれるので便利です。</strong></p>
+</div>
+</div>]]></description>
+            <pubDate>Thu, 14 Jun 2012 15:00:00 GMT</pubDate>
+        </item>
         <item>
             <link>http://127.0.0.1/blog/html/2012/06/12/2012_06_12.html</link>
             <guid>http://127.0.0.1/blog/html/2012/06/12/2012_06_12.html</guid>
