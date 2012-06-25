@@ -87,6 +87,9 @@
     <h3>Recent Posts</h3>
     <ul>
         <li>
+            <a href="2012/06/25/2012_06_25.html">2012/06/25</a>
+        </li>
+        <li>
             <a href="2012/06/19/2012_06_19.html">2012/06/19</a>
         </li>
         <li>
@@ -120,6 +123,63 @@
           <div class="body">
             
     
+        
+        <div class="timestamp postmeta">
+            <span>June 25, 2012</span> 
+        </div>
+        <?xml version="1.0" ?><div class="section" id="id1">
+<a href="2012/06/25/2012_06_25.html"><h1>2012/06/25</h1></a>
+<div class="section" id="pythonid-password">
+<h2>pythonでID/PASSWORDの管理</h2>
+<div class="line-block">
+<div class="line"><strong>インストール</strong></div>
+<div class="line"><br/></div>
+<div class="line">pitというモジュールを使うとできるみたいです。</div>
+<div class="line"><a class="reference external" href="http://d.hatena.ne.jp/a2c/20081016/1224097042">こちら</a> を参考にしました。</div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pit</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">依存関係でインストールされるpyYAMLのエラーが表示されますが、</div>
+<div class="line">特に <a class="reference external" href="https://groups.google.com/group/nltk-users/browse_thread/thread/e61a231006f2e95a?pli=1">問題はない</a> ようです。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>設定</strong></div>
+<div class="line"><br/></div>
+<div class="line">インタプリターから以下を実行すると、エディタが開きますので、</div>
+<div class="line">改行で一旦変更を加えて保存します。</div>
+<div class="line">はまりどころは、<a class="reference external" href="http://d.hatena.ne.jp/a2c/20081016/1224097042">参考にしたサイト</a> に記載の通りでした。</div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pit</span> <span class="kn">import</span> <span class="n">Pit</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">Pit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'label名'</span><span class="p">,</span> <span class="p">{</span><span class="s">'require'</span><span class="p">:{</span><span class="s">'login'</span><span class="p">:</span><span class="s">'your ID'</span><span class="p">,</span><span class="s">'passwd'</span><span class="p">:</span><span class="s">'password'</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>確認</strong></div>
+<div class="line"><br/></div>
+<div class="line">~/.pit/default.yamlに設定内容が保存されるので内容を確認します。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>使い方</strong></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pit</span> <span class="kn">import</span> <span class="n">Pit</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">Pit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'label名'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">test</span><span class="p">[</span><span class="s">'login'</span><span class="p">],</span><span class="n">test</span><span class="p">[</span><span class="s">'password'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+        
+    <div class="postmeta">
+        
+        <div class="author">
+            <span>Posted by Shuichi Takaoka</span>
+        </div>
+        
+        
+        
+    </div><div class="separator post_separator"></div>
         
         <div class="timestamp postmeta">
             <span>June 19, 2012</span> 

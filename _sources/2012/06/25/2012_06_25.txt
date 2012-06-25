@@ -1,0 +1,50 @@
+2012/06/25
+==========
+
+=========================
+pythonでID/PASSWORDの管理
+=========================
+
+| **インストール**
+|
+| pitというモジュールを使うとできるみたいです。
+| `こちら <http://d.hatena.ne.jp/a2c/20081016/1224097042>`_ を参考にしました。
+
+.. code-block:: python
+
+    sudo pip install pit
+
+
+| 依存関係でインストールされるpyYAMLのエラーが表示されますが、
+| 特に `問題はない <https://groups.google.com/group/nltk-users/browse_thread/thread/e61a231006f2e95a?pli=1>`_ ようです。
+
+| **設定**
+|
+| インタプリターから以下を実行すると、エディタが開きますので、
+| 改行で一旦変更を加えて保存します。
+| はまりどころは、`参考にしたサイト <http://d.hatena.ne.jp/a2c/20081016/1224097042>`_ に記載の通りでした。
+
+
+.. code-block:: python
+
+    from pit import Pit
+    conf = Pit.get('label名', {'require':{'login':'your ID','passwd':'password'}})
+
+
+| **確認**
+|
+| ~/.pit/default.yamlに設定内容が保存されるので内容を確認します。
+
+| **使い方**
+
+.. code-block:: python
+
+    from pit import Pit
+    test = Pit.get('label名')
+    print test['login'],test['password']
+
+
+.. author:: default
+.. categories:: none
+.. tags:: none
+.. comments::

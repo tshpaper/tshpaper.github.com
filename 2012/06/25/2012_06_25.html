@@ -12,7 +12,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2012/06/15 &mdash; No More Simple</title>
+    <title>2012/06/25 &mdash; No More Simple</title>
     
     <link rel="stylesheet" href="../../../_static/modern.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -33,8 +33,7 @@
     <link rel="shortcut icon" href="../../../_static/tinkerer.ico"/>
     
     <link rel="top" title="No More Simple" href="../../../index.html" />
-    <link rel="next" title="2012/06/12" href="../12/2012_06_12.html" />
-    <link rel="prev" title="2012/06/19" href="../19/2012_06_19.html" />
+    <link rel="next" title="2012/06/19" href="../19/2012_06_19.html" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html">
      
 
@@ -87,13 +86,13 @@
     <h3>Recent Posts</h3>
     <ul>
         <li>
-            <a href="../25/2012_06_25.html">2012/06/25</a>
+            <a href="#">2012/06/25</a>
         </li>
         <li>
             <a href="../19/2012_06_19.html">2012/06/19</a>
         </li>
         <li>
-            <a href="#">2012/06/15</a>
+            <a href="../15/2012_06_15.html">2012/06/15</a>
         </li>
         <li>
             <a href="../12/2012_06_12.html">2012/06/12</a>
@@ -125,72 +124,56 @@
     
     <div class="related">
         <ul>
-            <li>
-                 &laquo; <a href="../19/2012_06_19.html">2012/06/19</a>
-            </li>
             <li class="right">
-                <a href="../12/2012_06_12.html">2012/06/12</a> &raquo; 
+                <a href="../19/2012_06_19.html">2012/06/19</a> &raquo; 
             </li>
         </ul>
     </div>
     
         <div class="timestamp postmeta">
-            <span>June 15, 2012</span> 
+            <span>June 25, 2012</span> 
         </div>
     <div class="section" id="id1">
-<h1>2012/06/15</h1>
-<div class="section" id="blog">
-<h2>blogの新規作成の自動化</h2>
+<h1>2012/06/25</h1>
+<div class="section" id="pythonid-password">
+<h2>pythonでID/PASSWORDの管理</h2>
 <div class="line-block">
-<div class="line">blogをtinkererとGitHubで始めたので、</div>
-<div class="line">新規作成と更新を自動化しようと思いfabricのレシピ書いていたのですが、</div>
-<div class="line">virtualenv使っていて、workonの部分でエラーが出てはまったので備忘録。</div>
+<div class="line"><strong>インストール</strong></div>
+<div class="line"><br /></div>
+<div class="line">pitというモジュールを使うとできるみたいです。</div>
+<div class="line"><a class="reference external" href="http://d.hatena.ne.jp/a2c/20081016/1224097042">こちら</a> を参考にしました。</div>
 </div>
-<ul class="simple">
-<li>はじめに書いたレシピ</li>
-</ul>
-<div class="highlight-text"><div class="highlight"><pre>def blog_create():
-    local(&#39;workon sphinx&#39;)
-    cd(&#39;blog_tinkerer/sources&#39;)
-    local(&#39;sh ~/scripts/sh/blog_create.sh&#39;)
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pit</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>blog_create.sh</li>
-</ul>
-<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
-vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">&#39;{print $5}&#39;</span> | sed -e <span class="s2">&quot;s/^&#39;//g&quot;</span> -e <span class="s2">&quot;s/&#39;$//g&quot;</span><span class="sb">`</span>
+<div class="line-block">
+<div class="line">依存関係でインストールされるpyYAMLのエラーが表示されますが、</div>
+<div class="line">特に <a class="reference external" href="https://groups.google.com/group/nltk-users/browse_thread/thread/e61a231006f2e95a?pli=1">問題はない</a> ようです。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>設定</strong></div>
+<div class="line"><br /></div>
+<div class="line">インタプリターから以下を実行すると、エディタが開きますので、</div>
+<div class="line">改行で一旦変更を加えて保存します。</div>
+<div class="line">はまりどころは、<a class="reference external" href="http://d.hatena.ne.jp/a2c/20081016/1224097042">参考にしたサイト</a> に記載の通りでした。</div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pit</span> <span class="kn">import</span> <span class="n">Pit</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">Pit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;label名&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;require&#39;</span><span class="p">:{</span><span class="s">&#39;login&#39;</span><span class="p">:</span><span class="s">&#39;your ID&#39;</span><span class="p">,</span><span class="s">&#39;passwd&#39;</span><span class="p">:</span><span class="s">&#39;password&#39;</span><span class="p">}})</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>エラーの内容は以下のような感じです</li>
-</ul>
-<div class="highlight-text"><div class="highlight"><pre>/bin/sh: workon: command not found
+<div class="line-block">
+<div class="line"><strong>確認</strong></div>
+<div class="line"><br /></div>
+<div class="line">~/.pit/default.yamlに設定内容が保存されるので内容を確認します。</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>使い方</strong></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pit</span> <span class="kn">import</span> <span class="n">Pit</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">Pit</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;label名&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">test</span><span class="p">[</span><span class="s">&#39;login&#39;</span><span class="p">],</span><span class="n">test</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>いろいろと調べた結果、<a class="reference external" href="http://lists.gnu.org/archive/html/fab-user/2011-03/msg00035.html">ここのサイト</a> を参考に修正したらうまくいきました。</p>
-<ul class="simple">
-<li>修正後のfabricレシピ</li>
-</ul>
-<div class="highlight-text"><div class="highlight"><pre>def blog_create():
-    with prefix(&#39;source /usr/local/bin/virtualenvwrapper.sh&#39;):
-        with prefix(&#39;workon sphinx&#39;):
-            local(&#39;sh ~/scripts/sh/blog_create.sh&#39;)
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">ノート</p>
-<p class="last">cdでビルドするディレクトリまでfabricのレシピの中に書きたかったのですが、うまくいかなかったので、仕方なくshの中に処理を入れました。</p>
-</div>
-<ul class="simple">
-<li>blog_create.sh</li>
-</ul>
-<div class="highlight-sh"><div class="highlight"><pre><span class="c">#!/bin/sh</span>
-<span class="nb">cd </span>blog_tinkerer/sources
-vim <span class="sb">`</span>tinker -p <span class="se">\`</span>date +%Y/%m/%d<span class="se">\`</span> | awk <span class="s1">&#39;{print $5}&#39;</span> | sed -e <span class="s2">&quot;s/^&#39;//g&quot;</span> -e <span class="s2">&quot;s/&#39;$//g&quot;</span><span class="sb">`</span>
-</pre></div>
-</div>
-<p><strong>実行すると該当ファイルをvimで開くところまでやってくれるので便利です。</strong></p>
 </div>
 </div>
 
